@@ -1,3 +1,18 @@
+/*
+ * Copyright Romain Manni-Bucau
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.github.rmannibucau.asciidocat;
 
 /**
@@ -8,8 +23,20 @@ package com.github.rmannibucau.asciidocat;
  *   dark   = theme.css 'prefers-color-scheme: dark'
  */
 public final class Theme {
-    public enum Mode { LIGHT, DARK }
+    /** Available terminal background modes. */
+    public enum Mode {
+        /** Palette for a light terminal background. */
+        LIGHT,
+        /** Palette for a dark terminal background. */
+        DARK
+    }
 
+    /**
+     * Selects the shared palette for a background mode.
+     *
+     * @param mode background mode; {@code null} selects the light palette
+     * @return the matching shared theme
+     */
     public static Theme of(final Mode mode) {
         return mode == Mode.DARK ? DARK : LIGHT;
     }
@@ -17,6 +44,7 @@ public final class Theme {
     private static final int[] BRAND_BLUE = Ansi.rgb("#02ABEA");
     private static final int[] BRAND_BLUE_DARK = Ansi.rgb("#056EBB");
 
+    /** Shared palette for light terminal backgrounds. */
     public static final Theme LIGHT = new Theme(false,
         BRAND_BLUE_DARK,       // link (#056EBB)
         Ansi.rgb("#04558f"),   // code-text
@@ -30,6 +58,7 @@ public final class Theme {
         Ansi.rgb("#e13238")    // admon caution
     );
 
+    /** Shared palette for dark terminal backgrounds. */
     public static final Theme DARK = new Theme(true,
         BRAND_BLUE,            // link (#02ABEA)
         Ansi.rgb("#D858FF"),   // code-text (purple in dark)
@@ -71,7 +100,14 @@ public final class Theme {
         this.admonCaution = admonCaution;
     }
 
-    /** Heading line: prefix (#, ##, ...) plain, then bold colored title. */
+    /**
+     * Formats a heading with a hash prefix and optional bold color styling.
+     *
+     * @param level heading depth, clamped to the range 1 through 6
+     * @param color whether to style the prefix and title with ANSI sequences
+     * @param text heading title
+     * @return the formatted heading without a trailing newline
+     */
     public String heading(final int level, final boolean color, final String text) {
         final var prefix = "#".repeat(Math.min(6, Math.max(1, level))) + ' ';
         if (!color) {

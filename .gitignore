@@ -3,3 +3,10 @@ target/
 *.iws
 *.ipr
 .idea/
+release.properties
+pom.xml.releaseBackup
+pom.xml.tag
+pom.xml.next
+pom.xml.branch
+pom.xml.backup
+release-pom.xml

@@ -1,3 +1,18 @@
+/*
+ * Copyright Romain Manni-Bucau
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.github.rmannibucau.asciidocat;
 
 import java.util.List;
@@ -81,10 +96,27 @@ public final class SyntaxHighlighter {
     private final boolean enabled;
     private final CodeColors colors;
 
-    /** Syntax colors derived from the minisite palette for a given theme. */
+    /**
+     * Syntax colors derived from the minisite palette for a given theme.
+     *
+     * @param str ANSI foreground sequence for strings
+     * @param com ANSI foreground sequence for comments
+     * @param num ANSI foreground sequence for numbers
+     * @param kw ANSI foreground sequence for keywords
+     * @param ty ANSI foreground sequence for types
+     * @param tag ANSI foreground sequence for markup tags
+     * @param attr ANSI foreground sequence for markup attributes
+     * @param text ANSI foreground sequence for other text
+     */
     public record CodeColors(String str, String com, String num, String kw, String ty, String tag, String attr,
                              String text) {}
 
+    /**
+     * Creates the syntax palette for a light or dark theme.
+     *
+     * @param dark whether to use the dark theme
+     * @return ANSI color sequences for each token category
+     */
     public static CodeColors colors(final boolean dark) {
         final var blue = Ansi.fg(2, 171, 234);           // brand blue #02ABEA
         final var purple = dark ? Ansi.fg(216, 88, 255)  // brand purple #D858FF
@@ -104,11 +136,24 @@ public final class SyntaxHighlighter {
                 text);              // text
     }
 
+    /**
+     * Creates a syntax highlighter with the supplied palette.
+     *
+     * @param enabled whether to emit ANSI highlighting
+     * @param colors token color sequences
+     */
     public SyntaxHighlighter(final boolean enabled, final CodeColors colors) {
         this.enabled = enabled;
         this.colors = colors;
     }
 
+    /**
+     * Highlights code using language-specific rules or the generic fallback.
+     *
+     * @param lang language name or alias, or {@code null} to use generic rules
+     * @param code source text to highlight
+     * @return highlighted text, or the original code when highlighting is disabled
+     */
     public String highlight(final String lang, final String code) {
         if (!enabled) {
             return code;
