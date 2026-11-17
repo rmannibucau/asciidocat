@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.rmannibucau</groupId>
     <artifactId>asciidocat</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>asciidocat</name>
@@ -32,7 +30,7 @@
     <scm>
         <connection>scm:git:https://github.com/rmannibucau/asciidocat.git</connection>
         <developerConnection>scm:git:https://github.com/rmannibucau/asciidocat.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>asciidocat-0.0.1</tag>
         <url>https://github.com/rmannibucau/asciidocat</url>
     </scm>
 
@@ -48,7 +46,7 @@
         <central.publishing.server.id>central</central.publishing.server.id>
         <graalvm.version>25.0.2-graalce</graalvm.version>
         <native.os>${os.name}</native.os>
-        <native.executable.suffix></native.executable.suffix>
+        <native.executable.suffix />
     </properties>
 
     <dependencies>
@@ -185,7 +183,7 @@
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                     <resource>META-INF/NOTICE</resource>
                                 </transformer>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>com.github.rmannibucau.asciidocat.Asciidocat</mainClass>
                                 </transformer>
