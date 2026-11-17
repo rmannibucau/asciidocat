@@ -4,7 +4,7 @@
 
     <groupId>com.github.rmannibucau</groupId>
     <artifactId>asciidocat</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>asciidocat</name>
@@ -30,7 +30,7 @@
     <scm>
         <connection>scm:git:https://github.com/rmannibucau/asciidocat.git</connection>
         <developerConnection>scm:git:https://github.com/rmannibucau/asciidocat.git</developerConnection>
-        <tag>asciidocat-0.0.1</tag>
+        <tag>HEAD</tag>
         <url>https://github.com/rmannibucau/asciidocat</url>
     </scm>
 
